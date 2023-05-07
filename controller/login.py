@@ -7,7 +7,7 @@ def doLogin():
   validEmail = checkIsValidEmail()
   if not validEmail:
     return 'exit'
-  
+
   hash = getHash(validEmail)
   user = readUserById(hash)
   if user == None:
@@ -22,3 +22,5 @@ def doLogin():
       user = User(name, email)
       user.create()
       return user.read()
+  else:
+    return user

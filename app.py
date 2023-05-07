@@ -8,9 +8,11 @@ while isRunning:
   user = doLogin()
   
   if user == 'exit':
-    print('EXIT')
+    print('exiting app')
     isRunning = False
   else:
     print('user', user)
+    print('Olá', user['name'])
+    
     print('Tchau')
     isRunning = False
