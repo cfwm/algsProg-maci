@@ -6,6 +6,7 @@ def createUser(payload):
 
 def readUserById(id):
   users = readDB('user')
-  if users and users[id]:
+  if id in users:
     return users[id]
-  return None
+  else:
+    return None
