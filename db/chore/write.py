@@ -10,8 +10,8 @@ def writeDB(kind, payload):
   table = getTable(kind)
   fieldnames = getFieldNames(kind)
 
-  if not isTableExistent(kind):
-    createTable(kind)
+  if not isTableExistent(table):
+    createTable(table)
 
   with open(table, 'a') as file:
     writer = csv.DictWriter(file, fieldnames = fieldnames)
