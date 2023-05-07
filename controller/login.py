@@ -19,8 +19,8 @@ def doLogin():
     else:
       email = validEmail
       name = str(input('Digite seu nome: '))
-      user = User(name, email)
-      user.create()
+      user = User()
+      user.create(name, email)
       return user.read()
   else:
     return user
