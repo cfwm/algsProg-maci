@@ -1,6 +1,6 @@
 import csv
-from db.chore.write import createTable, isTableExistent
-from db.chore.utils import getTable
+from dataBase.write import createTable, isTableExistent
+from dataBase.utils import getTable
 
 def readDB(kind):
   table = getTable(kind)
@@ -12,6 +12,5 @@ def readDB(kind):
     result = dict()
     for row in csv_file:
       id = dict(row)['id']
-      if id:
-        result[id] = dict(row)
+      result[id] = dict(row)
     return result
