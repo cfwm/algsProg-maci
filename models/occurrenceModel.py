@@ -3,12 +3,12 @@ from dataBase.write import writeDB
 from time import time
 from utils.id.uuid import getNewId
 
-class UserModel():
+class OccurrenceModel():
   def __init__(self):
     None
 
-  def getUsersDict(self):
-    return readDB('user')
+  def getOcurrenceDict(self):
+    return readDB('occurrence')
   
   def createOccurrence(self,
     type: str,
