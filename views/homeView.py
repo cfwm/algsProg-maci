@@ -16,7 +16,6 @@ class HomeView():
       name = user['name']
 
     command = self.__inputValidCommand(name)
-    print('exec command', command)
     if command != '0':
       response['isRunning'] = True
       response['route'] = self.__homeMapper(command)
