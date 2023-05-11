@@ -4,31 +4,28 @@ class HomeView():
   def __init__(self):
     None
 
-  def home(self, user: object) -> bool:
-    print('HOME user', user)
-    name = ''
-    if 'name' in user:
+  def home(self, user) -> bool:
+    print('+++++++++++++++++++\n')
+    print('++++ Home home ++++\n')
+    print('+++++++++++++++++++\n')
+    response = {
+      'isRunning': False,
+      'route': 'login',
+      'user': None,
+    }
+    name = 'Nameless'
+    if user and 'name' in user:
+      response['user'] = user
       name = user['name']
 
     command = self.__inputValidCommand(name)
     print('exec command', command)
-    if command == '0':
-      print('TCHAU')
-      return {
-        'success': False
-      }
-    else:
-      print('Vamos lá...')
-      # __homeMapper(currentAction, command)
-      # return {
-      #   'success': True
-      # }
-      return {
-        'success': False
-      }
+    if command != '0':
+      response['isRunning'] = True
+      response['route'] = self.__homeMapper(command)
+    return response
     
   def __inputValidCommand(self, name) -> str:
-    print('__inputValidCommand name',name)
     command = stringInput([
       'Olá, ' + name,
       'Digite:',
@@ -62,25 +59,14 @@ class HomeView():
       print('__inputValidCommand command',command)
     return command
 
-  def __homeMapper(self, command: str) -> None:
-      return {
-        '1': 'listOccurrences',
-        '2': 'listUserOccurrences',
-        '3': 'listSustainablePracticeOccurrences',
-        '4': 'listUserSustainablePracticeOccurrences',
-        '5': 'listcomplaintOccurrences',
-        '6': 'listUsercomplaintOccurrences',
-        '7': 'createSustainablePracticeOccurrence',
-        '8': 'createComplaintOccurrence',
-      }[command]
-      # actions = {
-      #   '1': 'listOccurrences',
-      #   '2': 'listUserOccurrences',
-      #   '3': 'listSustainablePracticeOccurrences',
-      #   '4': 'listUserSustainablePracticeOccurrences',
-      #   '5': 'listcomplaintOccurrences',
-      #   '6': 'listUsercomplaintOccurrences',
-      #   '7': 'createSustainablePracticeOccurrence',
-      #   '8': 'createComplaintOccurrence',
-      # }
-      # currentAction = actions[command]
+  def __homeMapper(self, command: str) -> str:
+    return {
+      '1': 'listOccurrences',
+      '2': 'listUserOccurrences',
+      '3': 'listSustainablePracticeOccurrences',
+      '4': 'listUserSustainablePracticeOccurrences',
+      '5': 'listcomplaintOccurrences',
+      '6': 'listUsercomplaintOccurrences',
+      '7': 'createSustainablePracticeOccurrence',
+      '8': 'createComplaintOccurrence',
+    }[command]

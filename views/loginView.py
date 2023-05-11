@@ -9,11 +9,10 @@ class LoginView(UserController):
     None
 
   def login(self) -> bool:
-    print('**login')
     response = {
+      'isRunning': False,
+      'route': 'login',
       'user': None,
-      'success': False,
-      'nextRoute': 'login'
     }
     email = self.__inputValidEmail()
     if not email:
@@ -21,27 +20,22 @@ class LoginView(UserController):
     
     id = getHash(email)
     validUser = self.checkIsValidUser(id)
-    print('**validUser',validUser)
 
     if not validUser:
       newUserName = self.__inputNewUserName()
-      print('### newUserName', newUserName)
       if newUserName:
-        print('newUserName:')
         newUser = self.addUser(id, newUserName, email)
         if newUser:
-          print('if newUser', newUser)
           response = {
+            'isRunning': True,
+            'route': 'home',
             'user': newUser,
-            'success': True,
-            'nextRoute': 'home'
           }
     else:
-      print('else not validUser')
       response = {
+        'isRunning': True,
+        'route': 'home',
         'user': validUser,
-        'success': True,
-        'nextRoute': 'home'
       }
     return response
     
@@ -63,32 +57,26 @@ class LoginView(UserController):
     return email
 
   def __inputNewUserName(self) -> bool | str:
-    print('**** __inputNewUserName')
-    wantRegisterNewUser = stringInput([
+    commandWantRegisterNewUser = stringInput([
       'Usuário não cadastrado. Digite:',
       '  1 para criar um novo usuário;',
       '  0 para sair.',
     ])
-    print('wantRegisterNewUser', wantRegisterNewUser)
     validCommands = { '0', '1' }
-    while not wantRegisterNewUser in validCommands:
-    # while wantRegisterNewUser != '1' or wantRegisterNewUser != '0':
-      # print('wantRegisterNewUser',wantRegisterNewUser)
-      # print('validCommands',validCommands)
-      # print("not wantRegisterNewUser in validCommands",not wantRegisterNewUser in validCommands)
-      # print('\n')
-      wantRegisterNewUser = stringInput([
+    while not commandWantRegisterNewUser in validCommands:
+      commandWantRegisterNewUser = stringInput([
         'Comando inválido. Digite:',
         ' 1 para criar um novo usuário',
         ' 0 para sair.',
       ])    
-      print('while wantRegisterNewUser', wantRegisterNewUser)
     
-    print('AFTER wantRegisterNewUser', wantRegisterNewUser)
-    if wantRegisterNewUser == '0':
-      return False
-    else:
+    response = None
+    if commandWantRegisterNewUser == '0':
+      response = False
+    elif commandWantRegisterNewUser == '1':
       name = stringInput([
         'Digite seu nome.'
       ])
-      return name
+      response = name
+
+    return response

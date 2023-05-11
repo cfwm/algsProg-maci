@@ -3,13 +3,39 @@ from models.occurrenceModel import OccurrenceModel
 class OccurrenceController(OccurrenceModel):
   def __init__(self):
     None
+
+  def getOccurrences(self):
+    occurrences = self.readOccurrencesList()
+    return occurrences
   
-  def addUser(self, id: str, name: str, email: str):
-    return self.createUser(id, name, email)
+  def addOccurrence(self, 
+    type: str,
+    name: str,
+    description: str,
+    region: str,
+    city: str,
+    street: str,
+    number: str,
+    neighborhood: str,
+    country: str, 
+    initialDate: str,
+    endDate: str,
+    userId: str,
+  ):
+    return self.createOccurrence(
+      type,
+      name,
+      description,
+      region,
+      city,
+      street,
+      number,
+      neighborhood,
+      country, 
+      initialDate,
+      endDate,
+      userId,
+    )
+
+
   
-  def checkIsValidUser(self, id: str) -> dict | None:
-    users = self.getUsersDict()
-    if id in users:
-      return users[id]
-    else:
-      None

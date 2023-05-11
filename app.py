@@ -2,29 +2,32 @@ from routes.route import Route
 
 class App(Route):
   def __init__(self):
+    super().__init__()
     print('Bem vindo ao Mapa Ambiental Colaborativo e Interativo!')
+    self.isRunning = True
+    self.route = 'login'
+    self.user = None
 
-  def exec(self, route: str, user: object):
+  def exec(self):
     print('\n1 APP exec')
-    request = self.__requestHandler(route, user)
-    print('request',request)
-    # return self.__responseHandler({route, request})
-    response = self.__responseHandler(request, user)
-    print('response', response)
-
-    return response
+    request = self.__requestHandler()
+    print('## request ##\n',request)
+    self.__responseHandler(request)
+    return self.isRunning
   
-  def __requestHandler(self, route: str, user: object):
-    return self.next(route, user)
+  def __requestHandler(self):
+    request = self.next(self.route, self.user)
+    print('===> REQUEST <===\n',request)
+    return request
 
-  def __responseHandler(self, request, user):
-    updatedUser = user
-    if 'updatedUser' in request:
-      updatedUser = request['updatedUser']
-    return {
-      'success': request['success'],
-      'nextRoute': request['nextRoute'],
-      'user': updatedUser
-    }
+  def __responseHandler(self, request):
+    print('===> RESPONSE <===\n')
+    print('RESPONSE request',request)
+    if 'isRunning' in request:
+      self.isRunning = request['isRunning']
+    if 'route' in request:
+      self.route = request['route']
+    if 'user' in request:
+      self.user = request['user']
     
 

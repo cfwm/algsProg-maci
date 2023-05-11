@@ -1,14 +1,9 @@
-from views.components.inputs import stringInput
-
-from utils.hash.md5 import getHash
 from controllers.userController import UserController
 
-class UserView():
+class UserView(UserController):
   def __init__(self):
-    print('Bem vindo ao Mapa Ambiental Colaborativo e Interativo!')
-    self.currentAction = 'login'
+    None
 
-  # def listUserData(self)
-    
-  
-  # def createComplaintOccurrence(self) -> bool:
+  def getUser(self, id: str):
+    print('getUser uid', id)
+  # def updateUser(self)

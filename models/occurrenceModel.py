@@ -7,7 +7,7 @@ class OccurrenceModel():
   def __init__(self):
     None
 
-  def getOcurrenceDict(self):
+  def getOccurrenceDict(self):
     return readDB('occurrence')
   
   def createOccurrence(self,
@@ -43,27 +43,35 @@ class OccurrenceModel():
     writeDB('occurrence', ocurrenceData)
     return ocurrenceData
 
-def readOccurrences():
-  return readDB('occurrence')
+  def readOccurrencesDict(self):
+    return readDB('occurrence')
 
-def readOccurrenceById(id):
-  occurrences = readOccurrences()
-  if id in occurrences:
-    return occurrences[id]
-  else:
-    return None
+  def readOccurrenceById(self, id):
+    occurrences = self.readOccurrencesDict()
+    if id in occurrences:
+      return occurrences[id]
+    else:
+      return None
 
-def readOccurrencesByUser(user):
-  occurrences = readOccurrences()
-  result = list()
-  for occurrence in occurrences:
-    if occurrence['createdBy'] == user:
-      result.append(occurrence)
-  return result
+  def readOccurrencesByUser(self, user):
+    occurrences = self.readOccurrencesDict()
+    result = list()
+    for occurrence in occurrences:
+      if occurrence['createdBy'] == user:
+        result.append(occurrence)
+    return result
 
-def readAllOccurrences(user):
-  occurrences = readOccurrences()
-  result = list()
-  for occurrence in occurrences:
-      result.append(occurrence)
-  return result
+  def readOccurrencesByType(self, type):
+    occurrences = self.readOccurrencesDict()
+    result = list()
+    for occurrence in occurrences:
+      if occurrence['type'] == type:
+        result.append(occurrence)
+    return result
+
+  def readOccurrencesList(self):
+    occurrences = self.readOccurrencesDict()
+    result = list()
+    for occurrence in occurrences:
+        result.append(occurrence)
+    return result
