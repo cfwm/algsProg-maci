@@ -6,15 +6,15 @@ class UserModel():
   def __init__(self):
     None
 
-  def getUsersDict(self):
+  def readUsersDict(self):
     return readDB('user')
 
-  def getById(self, id):
-    users = self.getUsersDict()
+  def readUserById(self, id):
+    users = self.readUsersDict()
+    response = None
     if id in users:
-      return users[id]
-    else:
-      None
+      response = users[id]
+    return response
   
   def createUser(self, id: str, name: str, email: str):
     userData = {
@@ -25,11 +25,3 @@ class UserModel():
     }
     writeDB('user', userData)
     return userData
-
-
-  # def getUser(id):
-  #   users = readDB('user')
-  #   if id in users:
-  #     return users[id]
-  #   else:
-  #     return None

@@ -1,19 +1,22 @@
 from controllers.occurrenceController import OccurrenceController
-from views.components.outputs import listOutput
+from controllers.userController import UserController
+from views.components.outputs import printOccurrencesList
 from views.components.inputs import stringInput
 
-class OccurrenceView(OccurrenceController):
+class OccurrenceView(OccurrenceController, UserController):
   def __init__(self):
     None
 
   def listOccurrences(self):
     occurrences = self.getOccurrences()
-    print('Lista de ocorrências:')
-    if len(occurrences) > 0:
-      for i in range(len(occurrences)):
-        print(i + 1, ': ', occurrences[i])
-    else:
-      print('Nenhuma ocorrência cadastrada.')
+    users = self.getUsersDict()
+    printOccurrencesList(
+      'Lista de ocorrências',
+      'Nenhuma ocorrência cadastrada.',
+      occurrences,
+      ['id', 'type', 'name', 'description'],
+      users
+    )
     return {
       'isRunning': True,
       'route': 'home',
@@ -21,9 +24,13 @@ class OccurrenceView(OccurrenceController):
   
   def listOccurrencesByUser(self, user):
     occurrences = self.getOccurrencesByUser(user['id'])
-    titleText = 'Lista de ocorrências cadastradas por ' + user['name'] + ':'
-    noItemsText = 'Nenhuma ocorrência cadastrada.'
-    listOutput(titleText, noItemsText, occurrences)
+    printOccurrencesList(
+      'Lista de ocorrências cadastradas por ' + user['name'],
+      'Nenhuma ocorrência cadastrada.',
+      occurrences,
+      ['id', 'type', 'name', 'description'],
+      None
+    )
     return {
       'isRunning': True,
       'route': 'home',
@@ -31,12 +38,19 @@ class OccurrenceView(OccurrenceController):
 
   def listOccurrencesByType(self, type):
     occurrences = self.getOccurrencesByType(type)
+    users = self.getUsersDict()
     titleText = 'Lista de práticas sustentáveis'
     noItemsText = 'Nenhuma prática sustentável cadastrada.'
-    if type == '2':
+    if type == 'complaint':
       titleText = 'Lista de denúncias'
       noItemsText = 'Nenhuma denúncia cadastrada.'
-    listOutput(titleText, noItemsText, occurrences)
+    printOccurrencesList(
+      titleText,
+      noItemsText,
+      occurrences,
+      ['id', 'name', 'description'],
+      users
+    )
     return {
       'isRunning': True,
       'route': 'home',
@@ -45,11 +59,17 @@ class OccurrenceView(OccurrenceController):
   def listOccurrencesByUserAndType(self, user, type):
     occurrences = self.getOccurrencesByUserAndType(user['id'], type)
     titleText = 'Lista de práticas sustentáveis cadastradas por ' + user['name'] + ':'
-    noItemsText = 'Nenhuma prática sustentável cadastrada por ' + user['name'] + ':'
-    if type == '2':
+    noItemsText = 'Nenhuma prática sustentável cadastrada.'
+    if type == 'complaint':
       titleText = 'Lista de denúncias cadastradas por ' + user['name'] + ':'
-      noItemsText = 'Nenhuma denúncia cadastrada por ' + user['name'] + ':'
-    listOutput(titleText, noItemsText, occurrences)
+      noItemsText = 'Nenhuma denúncia cadastrada'
+    printOccurrencesList(
+      titleText,
+      noItemsText,
+      occurrences,
+      ['id', 'name', 'description'],
+      None
+    )
     return {
       'isRunning': True,
       'route': 'home',
