@@ -20,7 +20,7 @@ class OccurrenceView(OccurrenceController):
     }
   
   def listOccurrencesByUser(self, user):
-    occurrences = self.readOccurrencesByUser(user['id'])
+    occurrences = self.getOccurrencesByUser(user['id'])
     titleText = 'Lista de ocorrências cadastradas por ' + user['name'] + ':'
     noItemsText = 'Nenhuma ocorrência cadastrada.'
     listOutput(titleText, noItemsText, occurrences)
@@ -30,7 +30,7 @@ class OccurrenceView(OccurrenceController):
     }
 
   def listOccurrencesByType(self, type):
-    occurrences = self.readOccurrencesByType(type)
+    occurrences = self.getOccurrencesByType(type)
     titleText = 'Lista de práticas sustentáveis'
     noItemsText = 'Nenhuma prática sustentável cadastrada.'
     if type == '2':
@@ -43,7 +43,7 @@ class OccurrenceView(OccurrenceController):
     }
 
   def listOccurrencesByUserAndType(self, user, type):
-    occurrences = self.readOccurrencesByUserAndType(user['id'], type)
+    occurrences = self.getOccurrencesByUserAndType(user['id'], type)
     titleText = 'Lista de práticas sustentáveis cadastradas por ' + user['name'] + ':'
     noItemsText = 'Nenhuma prática sustentável cadastrada por ' + user['name'] + ':'
     if type == '2':
@@ -61,8 +61,8 @@ class OccurrenceView(OccurrenceController):
       'complaint': 'denúncia',
     }
     print('Cadastro de ' + occurrenceMapper[type])
-    name = self.__inputOccurence('name'),
-    description = self.__inputOccurence('description'),
+    name = self.__inputOccurence('name')
+    description = self.__inputOccurence('description')
     occurrence = self.addOccurrence(type, name, description, user['id'])
     print('Ocorrência ' + occurrence['name'] + ' cadastrada.')
     return {
