@@ -9,8 +9,24 @@ def readDB(kind):
 
   with open(table, 'r') as file:
     csv_file = csv.DictReader(file)
-    result = dict()
-    for row in csv_file:
-      id = dict(row)['id']
-      result[id] = dict(row)
+    result = formatDBResult(kind, csv_file)
     return result
+  
+def formatDBResult(kind, csvFile):
+  if kind == 'user':
+    return formatBDDict(csvFile)
+  elif kind == 'occurrence':
+    return formatBDList(csvFile)
+  
+def formatBDDict(csvFile):
+  result = dict()
+  for row in csvFile:
+    id = dict(row)['id']
+    result[id] = dict(row)
+  return result
+
+def formatBDList(csvFile):
+  result = list()
+  for row in csvFile:
+    result.append(dict(row))
+  return result

@@ -21,7 +21,6 @@ class UserModel():
       'id': id,
       'name': name,
       'email': email,
-      'occurrences': list(),
       'createdAt': time()
     }
     writeDB('user', userData)

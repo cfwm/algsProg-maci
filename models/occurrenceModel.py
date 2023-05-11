@@ -6,22 +6,11 @@ from utils.id.uuid import getNewId
 class OccurrenceModel():
   def __init__(self):
     None
-
-  def getOccurrenceDict(self):
-    return readDB('occurrence')
   
   def createOccurrence(self,
     type: str,
     name: str,
     description: str,
-    region: str,
-    city: str,
-    street: str,
-    number: str,
-    neighborhood: str,
-    country: str, 
-    initialDate: str,
-    endDate: str,
     createdBy: str
   ): 
     ocurrenceData = {
@@ -29,40 +18,25 @@ class OccurrenceModel():
       'type': type,
       'name': name,
       'description': description,
-      'region': region,
-      'city': city,
-      'street': street,
-      'number': number,
-      'neighborhood': neighborhood,
-      'country': country ,
-      'initialDate': initialDate,
-      'endDate': endDate,
       'createdAt': time(),
       'createdBy': createdBy,
     }
     writeDB('occurrence', ocurrenceData)
     return ocurrenceData
 
-  def readOccurrencesDict(self):
+  def readOccurrences(self):
     return readDB('occurrence')
 
-  def readOccurrenceById(self, id):
-    occurrences = self.readOccurrencesDict()
-    if id in occurrences:
-      return occurrences[id]
-    else:
-      return None
-
-  def readOccurrencesByUser(self, user):
-    occurrences = self.readOccurrencesDict()
+  def readOccurrencesByUser(self, userId):
+    occurrences = self.readOccurrences()
     result = list()
     for occurrence in occurrences:
-      if occurrence['createdBy'] == user:
+      if occurrence['createdBy'] == userId:
         result.append(occurrence)
     return result
 
   def readOccurrencesByType(self, type):
-    occurrences = self.readOccurrencesDict()
+    occurrences = self.readOccurrences()
     result = list()
     for occurrence in occurrences:
       if occurrence['type'] == type:
@@ -70,8 +44,16 @@ class OccurrenceModel():
     return result
 
   def readOccurrencesList(self):
-    occurrences = self.readOccurrencesDict()
+    occurrences = self.readOccurrences()
     result = list()
     for occurrence in occurrences:
+        result.append(occurrence)
+    return result
+  
+  def readOccurrencesByUserAndType(self, userId, type):
+    occurrences = self.readOccurrences()
+    result = list()
+    for occurrence in occurrences:
+      if occurrence['type'] == type and occurrence['createdBy'] == userId:
         result.append(occurrence)
     return result

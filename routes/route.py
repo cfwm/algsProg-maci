@@ -17,4 +17,18 @@ class Route(LoginView, HomeView, OccurrenceView):
         response = self.home(user)
       case 'listOccurrences':
         response = self.listOccurrences()
+      case 'listOccurrencesByUser':
+        response = self.listOccurrencesByUser(user)
+      case 'listSustainablePracticeOccurrences':
+        response = self.listOccurrencesByType('sustainablePractice')
+      case 'listUserSustainablePracticeOccurrences':
+        response = self.listOccurrencesByUserAndType(user, 'sustainablePractice')
+      case 'listcomplaintOccurrences':
+        response = self.listOccurrencesByType('complaint')
+      case 'listUsercomplaintOccurrences':
+        response = self.listOccurrencesByUserAndType(user, 'complaint')
+      case 'createSustainablePracticeOccurrence':
+        response = self.newOccurrence(user, 'sustainablePractice')
+      case 'createComplaintOccurrence':
+        response = self.newOccurrence(user, 'complaint')
     return response

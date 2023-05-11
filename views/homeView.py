@@ -5,9 +5,6 @@ class HomeView():
     None
 
   def home(self, user) -> bool:
-    print('+++++++++++++++++++\n')
-    print('++++ Home home ++++\n')
-    print('+++++++++++++++++++\n')
     response = {
       'isRunning': False,
       'route': 'login',
@@ -33,9 +30,9 @@ class HomeView():
       '  2 para listar todas as ocorrências cadastradas por você;',
       '  3 para listar práticas sustentáveis;',
       '  4 para listar práticas sustentáveis cadastradas por você;',
-      '  5 para criar uma prática sustentável;',
-      '  6 para listar denúncias;',
-      '  7 para listar denúncias cadastradas por você;',
+      '  5 para listar denúncias;',
+      '  6 para listar denúncias cadastradas por você;',
+      '  7 para criar uma prática sustentável;',
       '  8 para criar uma denúncia;',
       '  0 para sair do programa.',
     ])
@@ -49,9 +46,9 @@ class HomeView():
         '  2 para listar todas as ocorrências cadastradas por você;',
         '  3 para listar práticas sustentáveis;',
         '  4 para listar práticas sustentáveis cadastradas por você;',
-        '  6 para listar denúncias;',
-        '  7 para listar denúncias cadastradas por você;',
-        '  5 para criar uma prática sustentável;',
+        '  5 para listar denúncias;',
+        '  6 para listar denúncias cadastradas por você;',
+        '  7 para criar uma prática sustentável;',
         '  8 para criar uma denúncia;',
         '  0 para sair do programa.',
       ])
@@ -62,7 +59,7 @@ class HomeView():
   def __homeMapper(self, command: str) -> str:
     return {
       '1': 'listOccurrences',
-      '2': 'listUserOccurrences',
+      '2': 'listOccurrencesByUser',
       '3': 'listSustainablePracticeOccurrences',
       '4': 'listUserSustainablePracticeOccurrences',
       '5': 'listcomplaintOccurrences',
