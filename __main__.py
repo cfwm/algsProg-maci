@@ -1,7 +1,6 @@
-from view.userView import UserView
+from app import App
 
-isRunning = True
-user = UserView()
+app = App()
 
-while isRunning:
-  isRunning = user.getNextAction()
+while app.isRunning:
+  app.exec()
