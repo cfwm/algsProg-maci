@@ -14,7 +14,7 @@ class OccurrenceView(OccurrenceController, UserController):
       'Lista de ocorrências',
       'Nenhuma ocorrência cadastrada.',
       occurrences,
-      ['id', 'type', 'name', 'description'],
+      ['id', 'type', 'name', 'description', 'createdAt'],
       users
     )
     return {
@@ -28,7 +28,7 @@ class OccurrenceView(OccurrenceController, UserController):
       'Lista de ocorrências cadastradas por ' + user['name'],
       'Nenhuma ocorrência cadastrada.',
       occurrences,
-      ['id', 'type', 'name', 'description'],
+      ['id', 'type', 'name', 'description', 'createdAt'],
       None
     )
     return {
@@ -48,7 +48,7 @@ class OccurrenceView(OccurrenceController, UserController):
       titleText,
       noItemsText,
       occurrences,
-      ['id', 'name', 'description'],
+      ['id', 'name', 'description', 'createdAt'],
       users
     )
     return {
@@ -67,7 +67,7 @@ class OccurrenceView(OccurrenceController, UserController):
       titleText,
       noItemsText,
       occurrences,
-      ['id', 'name', 'description'],
+      ['id', 'name', 'description', 'createdAt'],
       None
     )
     return {

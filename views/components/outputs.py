@@ -9,10 +9,16 @@ def printOccurrencesList(title, noItemsText, occurrences, fields, users):
       'type': 'Tipo',
       'name': 'Nome',
       'description': 'Descrição',
+      'createdAt': 'Data de cadastro'
     }
     for i in range(len(fields)):
       if fields[i] == 'type':
         print(fieldTypeTranslateMapper[fields[i]] + ': ' + occurrenceTypeTranslateMapper[occurrence[fields[i]]])  
+      elif fields[i] == 'createdAt':
+        day = occurrence[fields[i]][0:10].split('-')[2]
+        month = occurrence[fields[i]][0:10].split('-')[1]
+        year = occurrence[fields[i]][0:10].split('-')[0]
+        print(fieldTypeTranslateMapper[fields[i]] + ': ' + day + '/' + month + '/' + year)
       else:
         print(fieldTypeTranslateMapper[fields[i]] + ': ' + occurrence[fields[i]])
 

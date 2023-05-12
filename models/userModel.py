@@ -1,6 +1,6 @@
 from dataBase.read import readDB
 from dataBase.write import writeDB
-from time import time
+from datetime import datetime
 
 class UserModel():
   def __init__(self):
@@ -21,7 +21,7 @@ class UserModel():
       'id': id,
       'name': name,
       'email': email,
-      'createdAt': time()
+      'createdAt': datetime.now(),
     }
     writeDB('user', userData)
     return userData

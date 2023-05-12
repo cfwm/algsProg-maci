@@ -1,6 +1,6 @@
 from dataBase.read import readDB
 from dataBase.write import writeDB
-from time import time
+from datetime import datetime
 from utils.id.uuid import getNewId
 
 class OccurrenceModel():
@@ -18,7 +18,7 @@ class OccurrenceModel():
       'type': type,
       'name': name,
       'description': description,
-      'createdAt': time(),
+      'createdAt': datetime.now(),
       'createdBy': createdBy,
     }
     writeDB('occurrence', ocurrenceData)
