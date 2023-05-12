@@ -6,4 +6,4 @@ class UserView(UserController):
 
   def getUser(self, id: str):
     print('getUser uid', id)
-  # def updateUser(self)
+

@@ -50,3 +50,12 @@ def inputNewUserName() -> bool | str:
     response = name
 
   return response
+
+def inputOccurence(field) -> str:
+  titleMapper = {
+    "name": "o nome",
+    "description": "a descrição",
+  }
+  text = 'Informe ' + titleMapper[field] + ':'
+  response = stringInput([text])
+  return response

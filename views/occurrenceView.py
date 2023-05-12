@@ -1,7 +1,7 @@
 from controllers.occurrenceController import OccurrenceController
 from controllers.userController import UserController
 from views.components.outputs import printOccurrencesList
-from views.components.inputs import stringInput
+from views.components.inputs import inputOccurence
 
 class OccurrenceView(OccurrenceController, UserController):
   def __init__(self):
@@ -81,20 +81,12 @@ class OccurrenceView(OccurrenceController, UserController):
       'complaint': 'denúncia',
     }
     print('Cadastro de ' + occurrenceMapper[type])
-    name = self.__inputOccurence('name')
-    description = self.__inputOccurence('description')
+    name = inputOccurence('name')
+    description = inputOccurence('description')
     occurrence = self.addOccurrence(type, name, description, user['id'])
     print('Ocorrência ' + occurrence['name'] + ' cadastrada.')
     return {
       'isRunning': True,
       'route': 'home',
     }
-  
-  def __inputOccurence(self, field) -> str:
-    titleMapper = {
-      "name": "o nome",
-      "description": "a descrição",
-    }
-    text = 'Informe ' + titleMapper[field] + ':'
-    response = stringInput([text])
-    return response
+
