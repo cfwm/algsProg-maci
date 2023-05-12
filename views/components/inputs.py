@@ -1,4 +1,4 @@
-from validators.email import checkIsValidEmail
+from utils.validators.email import checkIsValidEmail
 
 def stringInput(texts: list[str]) -> str:
   inputText = str()
